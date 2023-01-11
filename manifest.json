@@ -11,14 +11,14 @@
 		"service_worker": "background.js"
 	},
 	"icons": {
-		"16": "data/icon/icon-16.png",
-		"32": "data/icon/icon-32.png",
-		"48": "data/icon/icon-48.png",
-		"128": "data/icon/icon-128.png"
+		"16": "icon/icon-16.png",
+		"32": "icon/icon-32.png",
+		"48": "icon/icon-48.png",
+		"128": "icon/icon-128.png"
 	},
 	"action": {
 		"default_title": "Toggle Coach's Translation Tool for current tab",
-		"default_icon": "data/icon/icon-48.png"
+		"default_icon": "icon/icon-48.png"
 	},
 	"content_scripts": [{
 		"matches": ["https://docs.google.com/spreadsheets/*"],
@@ -26,7 +26,14 @@
 		"js": ["inject.js"]
 	}],
 	"web_accessible_resources": [{
-		"resources": ["preview_box.html", "data/css/*.css", "https://*.legiontd2.com/*", "https://fonts.gstatic.com/*"],
+		"resources": [
+			"preview_box.html",
+			"https://*.legiontd2.com/*",
+			"https://fonts.gstatic.com/*",
+			"https://fonts.googleapis.com/*",
+			"https://use.fontawesome.com/*",
+			"https://cdnjs.cloudflare.com/*"
+		],
 		"matches": ["<all_urls>"]
 	}]
 }
