@@ -1,0 +1,45 @@
+#dragDiv {
+	position: absolute;
+	z-index: 9;
+	background-color: #ba54f5;
+	border: 1px solid #d3d3d3;
+	text-align: left;
+	top: 5%;
+	left: 5%;
+	width: auto;
+	height: auto;
+	display: none;
+	font-family: poppins,sans-serif;
+	box-sizing: border-box;
+}
+
+#dragDivHeader {
+	width: auto;
+	height: auto;
+	cursor: move;
+	z-index: 10;
+	color: white;
+	font-family: poppins,sans-serif;
+	text-align: left;
+	background-color: #1e1e2f;
+	margin-top: 3px;
+	text-transform: uppercase;
+	font-size: 1rem;
+}
+
+#dragDivTranslation{
+	width: 100%;
+	height: 100%;
+	background-color:transparent;
+	color: white;
+	border-color: gray;
+	overflow-y:auto;
+}
+
+.apex-data{
+	margin: 2px;
+	padding: 0 5px;
+	display:inline-block;
+	background-color: #464646;
+	border: 1px dashed #707070;
+}

@@ -1,0 +1,32 @@
+{
+	"name": "LTD2 Translation Tool",
+	"manifest_version": 3,
+	"version": "0.1",
+	"description": "Adds cool quality of life features to Google Sheet to help translators of Legion TD 2",
+	"permissions": [
+		"activeTab",
+		"scripting"
+	],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"icons": {
+		"16": "data/icon/icon-16.png",
+		"32": "data/icon/icon-32.png",
+		"48": "data/icon/icon-48.png",
+		"128": "data/icon/icon-128.png"
+	},
+	"action": {
+		"default_title": "Toggle Coach's Translation Tool for current tab",
+		"default_icon": "data/icon/icon-48.png"
+	},
+	"content_scripts": [{
+		"matches": ["https://docs.google.com/spreadsheets/*"],
+		"css": ["inject.css"],
+		"js": ["inject.js"]
+	}],
+	"web_accessible_resources": [{
+		"resources": ["preview_box.html", "data/fonts/*.woff2", "https://*.legiontd2.com/*"],
+		"matches": ["<all_urls>"]
+	}]
+}
