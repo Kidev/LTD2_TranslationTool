@@ -1,7 +1,7 @@
 #dragDiv {
 	position: absolute;
 	z-index: 9;
-	background-color: #ba54f5;
+	background-color: #27293c;
 	border: 1px solid #d3d3d3;
 	text-align: left;
 	top: 5%;
@@ -21,8 +21,8 @@
 	color: white;
 	font-family: poppins,sans-serif;
 	text-align: left;
-	background-color: #1e1e2f;
-	margin-top: 3px;
+	background-color: #1e1e2e;
+	padding: 5px;
 	text-transform: uppercase;
 	font-size: 1rem;
 }
@@ -34,6 +34,17 @@
 	color: white;
 	border-color: gray;
 	overflow-y:auto;
+	box-sizing: border-box;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 21px;
+	text-align: left;
+	text-size-adjust: 100%;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	overflow-wrap: break-word;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .apex-data{
