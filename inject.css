@@ -1,15 +1,19 @@
 #dragDiv {
 	position: absolute;
 	z-index: 9;
-	background-color: #27293c;
-	border: 1px solid #d3d3d3;
+	background-color: #1d1d2e;
+	border-color: transparent;
+	/* border: 1px solid #d3d3d3; */
 	text-align: left;
 	top: 5%;
 	left: 5%;
 	width: auto;
+	max-width: 400px;
+	max-height: 1000px;
 	height: auto;
 	font-family: poppins,sans-serif;
 	box-sizing: border-box;
+	border-radius: 20px;
 }
 
 #dragDivHeader {
@@ -20,18 +24,21 @@
 	color: white;
 	font-family: poppins,sans-serif;
 	text-align: left;
-	background-color: #1e1e2e;
+	background-color: #27293d;
+	border-color: transparent;
+	border-top: 5px;
 	padding: 5px;
 	text-transform: uppercase;
 	font-size: 1rem;
 }
 
-#dragDivTranslation{
+#dragDivTranslation {
 	width: 100%;
 	height: 100%;
-	background-color:transparent;
+	background-color: #27293d;
 	color: white;
-	border-color: gray;
+	border-color: transparent;
+	border-bottom: 5px;
 	overflow-y:auto;
 	box-sizing: border-box;
 	font-size: 14px;
@@ -43,6 +50,7 @@
 	overflow-wrap: break-word;
 	user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	padding: 5px;
 }
 
 .apex-data{
