@@ -1,9 +1,11 @@
 function toggleDiv() {
 	var element = document.getElementById("dragDiv");
-	if (element.style.display === "none") {
-		element.style.display = "block";
-	} else {
-		element.style.display = "none";
+	if (typeof element !== 'undefined' && element !== null) {
+		if (element.style.display === "none") {
+			element.style.display = "block";
+		} else {
+			element.style.display = "none";
+		}
 	}
 }
 

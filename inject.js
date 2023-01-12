@@ -67,31 +67,44 @@ function dragElement(elmnt) {
 	}
 }
 
-var div = document.createElement("div");
-div.setAttribute("id", "dragDiv");
+// When page is loaded
+window.onload = (event) => {
 
-document.body.append(div);
+	var div = document.createElement("div");
+	div.setAttribute("id", "dragDiv");
+	document.body.append(div);
 
-dragElement(div);
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', chrome.runtime.getURL("preview_box.html"), true);
+	xhr.onreadystatechange = function()
+	{
+		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+			document.getElementById("dragDiv").innerHTML = xhr.responseText;
+			dragElement(document.getElementById("dragDiv"));
 
+			function addObserverIfDesiredNodeAvailable() {
 
-var xhr = new XMLHttpRequest();
-xhr.open('GET', chrome.runtime.getURL("preview_box.html"), true);
-xhr.onreadystatechange = function()
-{
-	if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-		document.getElementById("dragDiv").innerHTML = xhr.responseText;
-	}
+				console.log("CHECKING FOR CELL");
+
+				var target = document.querySelector('#t-formula-bar-input > .cell-input')
+
+				if (target === null) {
+					window.setTimeout(addObserverIfDesiredNodeAvailable,500);
+					return;
+				}
+
+				var observer = new MutationObserver(function(mutations) {
+					document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+				});
+
+				observer.observe(target, {
+					attributes:    true,
+					childList:     true,
+					characterData: true
+				});
+			}
+			addObserverIfDesiredNodeAvailable();
+		}
+	};
+	xhr.send();
 };
-xhr.send();
-
-
-var observedInput = document.getElementById('t-formula-bar-input').getElementsByClassName('cell-input')[0];
-
-document.addEventListener("click", function(event) {
-	document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(observedInput.innerHTML);
-}, false);
-
-observedInput.addEventListener("input", function() {
-	document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(observedInput.innerHTML);
-}, false);
