@@ -82,8 +82,8 @@ function injectCSSSheet(sheetContent) {
 
 function onWindowReady() {
 
-	injectCSS("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
-	injectCSS("https://developer.legiontd2.com/black/css/nucleo-icons.css");
+	//injectCSS("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
+	//injectCSS("https://developer.legiontd2.com/black/css/nucleo-icons.css");
 	injectCSS("https://developer.legiontd2.com/css/btf.css");
 	injectCSS("https://developer.legiontd2.com/css/style.css");
 	injectCSS("https://developer.legiontd2.com/css/flag-icon.css");
