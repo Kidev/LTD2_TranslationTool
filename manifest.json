@@ -22,7 +22,6 @@
 	},
 	"content_scripts": [{
 		"matches": ["https://docs.google.com/spreadsheets/*"],
-		"css": ["inject.css"],
 		"js": ["inject.js"]
 	}],
 	"web_accessible_resources": [{
@@ -30,9 +29,7 @@
 			"preview_box.html",
 			"https://*.legiontd2.com/*",
 			"https://fonts.gstatic.com/*",
-			"https://fonts.googleapis.com/*",
-			"https://use.fontawesome.com/*",
-			"https://cdnjs.cloudflare.com/*"
+			"https://use.fontawesome.com/*"
 		],
 		"matches": ["<all_urls>"]
 	}]

@@ -31,14 +31,14 @@ function replaceSpecialCharsInText(str_in) {
 	return result;
 }
 
-function dragElement(elmnt) {
+function dragElement(elem) {
 	
 	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 	
-	if (document.getElementById(elmnt.id + "Header")) {
-		document.getElementById(elmnt.id + "Header").onmousedown = dragMouseDown;
+	if (document.getElementById(elem.id + "Header")) {
+		document.getElementById(elem.id + "Header").onmousedown = dragMouseDown;
 	} else {
-		elmnt.onmousedown = dragMouseDown;
+		elem.onmousedown = dragMouseDown;
 	}
 
 	function dragMouseDown(e) {
@@ -57,8 +57,8 @@ function dragElement(elmnt) {
 		pos2 = pos4 - e.clientY;
 		pos3 = e.clientX;
 		pos4 = e.clientY;
-		elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-		elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+		elem.style.top = (elem.offsetTop - pos2) + "px";
+		elem.style.left = (elem.offsetLeft - pos1) + "px";
 	}
 
 	function closeDragElement() {
@@ -67,8 +67,97 @@ function dragElement(elmnt) {
 	}
 }
 
-// When page is loaded
-window.onload = (event) => {
+function injectCSS(source) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	linkElement.href = source;
+	document.head.appendChild(linkElement);
+}
+
+function injectCSSSheet(sheetContent) {
+	var linkElement = document.createElement("style");
+	linkElement.innerHTML = sheetContent;
+	document.head.appendChild(linkElement);
+}
+
+function onWindowReady() {
+
+	injectCSS("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
+	injectCSS("https://developer.legiontd2.com/black/css/nucleo-icons.css");
+	injectCSS("https://developer.legiontd2.com/css/btf.css");
+	injectCSS("https://developer.legiontd2.com/css/style.css");
+	injectCSS("https://developer.legiontd2.com/css/flag-icon.css");
+	injectCSS("https://developer.legiontd2.com/black/css/black-dashboard.css?v=1.0.3");
+	injectCSS("https://developer.legiontd2.com/black/css/theme.css");
+	injectCSSSheet("" +
+		"@font-face {\n" +
+		"    font-family: 'Poppins';\n" +
+		"    font-style: normal;\n" +
+		"    font-weight: 400;\n" +
+		"    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');\n" +
+		"    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;\n" +
+		"}\n" +
+		"#dragDiv {\n" +
+		"    position: absolute;\n" +
+		"    z-index: 9;\n" +
+		"    background-color: transparent; /*/*red;/*#1d1d2e;*/\n" +
+		"    border-color: red;\n" +
+		"    /* border: 1px solid #d3d3d3; */\n" +
+		"    text-align: left;\n" +
+		"    top: 5%;\n" +
+		"    left: 5%;\n" +
+		"    width: auto;\n" +
+		"    max-width: 400px;\n" +
+		"    max-height: 1000px;\n" +
+		"    height: auto;\n" +
+		"    font-family: poppins,sans-serif;\n" +
+		"    box-sizing: border-box;\n" +
+		"    border-radius: 100px;\n" +
+		"    padding-top: -10px;\n" +
+		"}\n" +
+		"#dragDivHeader {\n" +
+		"    width: auto;\n" +
+		"    height: 0;\n" +
+		"    cursor: move;\n" +
+		"    z-index: 10;\n" +
+		"    color: white;\n" +
+		"    font-family: poppins,sans-serif;\n" +
+		"    text-align: left;\n" +
+		"    background-color: /*#27293d;*/\n" +
+		"    border-color: 100px;/*rgba(100, 1000, 0, 200;*/\n" +
+		"    border-top: -50px;\n" +
+		"    padding: -5px;\n" +
+		"    text-transform: uppercase;\n" +
+		"    font-size: 1rem;\n" +
+		"}\n" +
+		"#dragDivTranslation {\n" +
+		"    width: 100%;\n" +
+		"    height: 100%;\n" +
+		"    background-color: #27293d;\n" +
+		"    color: white;\n" +
+		"    border-color: transparent;\n" +
+		"    border-bottom: 5px;\n" +
+		"    overflow-y:auto;\n" +
+		"    box-sizing: border-box;\n" +
+		"    font-size: 14px;\n" +
+		"    font-weight: 700;\n" +
+		"    line-height: 21px;\n" +
+		"    text-align: left;\n" +
+		"    text-transform: none;\n" +
+		"    -webkit-font-smoothing: antialiased;\n" +
+		"    overflow-wrap: break-word;\n" +
+		"    user-select: none;\n" +
+		"    -webkit-tap-highlight-color: rgba(0,0,0,0);\n" +
+		"    padding: 5px;\n" +
+		"}\n" +
+		".apex-data{\n" +
+		"    margin: 2px;\n" +
+		"    padding: 0 5px;\n" +
+		"    display:inline-block;\n" +
+		"    background-color: #464646;\n" +
+		"    border: 1px dashed #707070;\n" +
+		"}"
+	);
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -107,4 +196,88 @@ window.onload = (event) => {
 		}
 	};
 	xhr.send();
-};
+}
+
+// When page is loaded
+window.onload = (event) => onWindowReady();
+
+
+/*
+<script src="https://developer.legiontd2.com/black/js/core/jquery.min.js"></script>
+<script src="https://developer.legiontd2.com/black/js/core/popper.min.js"></script>
+<script src="https://developer.legiontd2.com/black/js/core/bootstrap.min.js"></script>
+<script src="https://developer.legiontd2.com/black/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<script src="https://developer.legiontd2.com/black/js/plugins/bootstrap-notify.js"></script>
+<script src="https://developer.legiontd2.com/black/js/black-dashboard.min.js?v=1.0.0"></script>
+<script src="https://developer.legiontd2.com/black/js/theme.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://developer.legiontd2.com/black/js/plugins/chartjs.min.js"></script>
+ */
+
+
+/*
+
+#dragDiv {
+	position: absolute;
+	z-index: 9;
+	background-color: transparent;
+	border-color: red;
+	text-align: left;
+	top: 5%;
+	left: 5%;
+	width: auto;
+	max-width: 400px;
+	max-height: 1000px;
+	height: auto;
+	font-family: poppins,sans-serif;
+	box-sizing: border-box;
+	border-radius: 100px;
+	padding-top: -10px;
+}
+
+#dragDivHeader {
+	width: auto;
+	height: 0;
+	cursor: move;
+	z-index: 10;
+	color: white;
+	font-family: poppins,sans-serif;
+	text-align: left;
+	background-color:
+	border-color: 100px;
+	border-top: -50px;
+	padding: -5px;
+	text-transform: uppercase;
+	font-size: 1rem;
+}
+
+#dragDivTranslation {
+	width: 100%;
+	height: 100%;
+	background-color: #27293d;
+	color: white;
+	border-color: transparent;
+	border-bottom: 5px;
+	overflow-y:auto;
+	box-sizing: border-box;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 21px;
+	text-align: left;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	overflow-wrap: break-word;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	padding: 5px;
+}
+
+.apex-data{
+	margin: 2px;
+	padding: 0 5px;
+	display:inline-block;
+	background-color: #464646;
+	border: 1px dashed #707070;
+}
+
+ */
