@@ -11,10 +11,8 @@
 		"service_worker": "background.js"
 	},
 	"icons": {
-		"16": "icon/icon-16.png",
 		"32": "icon/icon-32.png",
-		"48": "icon/icon-48.png",
-		"128": "icon/icon-128.png"
+		"48": "icon/icon-48.png"
 	},
 	"action": {
 		"default_title": "Toggle Coach's Translation Tool for current tab",
