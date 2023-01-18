@@ -84,26 +84,26 @@ function onWindowReady() {
 
 	//injectCSS("https://use.fontawesome.com/releases/v5.0.6/css/all.css");
 	//injectCSS("https://developer.legiontd2.com/black/css/nucleo-icons.css");
-	injectCSS("https://developer.legiontd2.com/css/btf.css");
+	/*injectCSS("https://developer.legiontd2.com/css/btf.css");
 	injectCSS("https://developer.legiontd2.com/css/style.css");
 	injectCSS("https://developer.legiontd2.com/css/flag-icon.css");
 	injectCSS("https://developer.legiontd2.com/black/css/black-dashboard.css?v=1.0.3");
-	injectCSS("https://developer.legiontd2.com/black/css/theme.css");
+	injectCSS("https://developer.legiontd2.com/black/css/theme.css");*/
+	/*
 	injectCSSSheet("" +
 		"@font-face {\n" +
 		"    font-family: 'Poppins';\n" +
 		"    font-style: normal;\n" +
 		"    font-weight: 400;\n" +
-		"    src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');\n" +
+		"    src: url(" + chrome.runtime.getURL("font/Poppins-Regular.ttf") + ") format('ttf');\n" +
 		"    unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;\n" +
 		"}\n" +
 		"#dragDiv {\n" +
 		"    position: absolute;\n" +
 		"    z-index: 9;\n" +
-		"    background-color: transparent; /*/*red;/*#1d1d2e;*/\n" +
+		"    background-color: transparent; \n" + //*red;/*#1d1d2e;
 		"    border-color: red;\n" +
-		"    /* border: 1px solid #d3d3d3; */\n" +
-		"    text-align: left;\n" +
+		"    text-align: left;\n" + // border: 1px solid #d3d3d3;
 		"    top: 5%;\n" +
 		"    left: 5%;\n" +
 		"    width: auto;\n" +
@@ -123,8 +123,8 @@ function onWindowReady() {
 		"    color: white;\n" +
 		"    font-family: poppins,sans-serif;\n" +
 		"    text-align: left;\n" +
-		"    background-color: /*#27293d;*/\n" +
-		"    border-color: 100px;/*rgba(100, 1000, 0, 200;*/\n" +
+		"    background-color: \n" + //#27293d;
+		"    border-color: 100px;\n" + //rgba(100, 1000, 0, 200;
 		"    border-top: -50px;\n" +
 		"    padding: -5px;\n" +
 		"    text-transform: uppercase;\n" +
@@ -157,7 +157,7 @@ function onWindowReady() {
 		"    background-color: #464646;\n" +
 		"    border: 1px dashed #707070;\n" +
 		"}"
-	);
+	);*/
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -172,8 +172,6 @@ function onWindowReady() {
 			dragElement(document.getElementById("dragDiv"));
 
 			function addObserverIfDesiredNodeAvailable() {
-
-				console.log("CHECKING FOR CELL");
 
 				var target = document.querySelector('#t-formula-bar-input > .cell-input')
 
