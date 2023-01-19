@@ -67,20 +67,24 @@ function dragElement(elem) {
 	}
 }
 
-function injectCSS(source) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	linkElement.href = source;
-	document.head.appendChild(linkElement);
-}
-
-function injectCSSSheet(sheetContent) {
-	var linkElement = document.createElement("style");
-	linkElement.innerHTML = sheetContent;
-	document.head.appendChild(linkElement);
-}
-
 function onWindowReady() {
+
+	const cssFiles = [
+		"inject.css",
+		"css/btf.css",
+		"css/black-dashboard.css",
+		"css/flag-icon.css",
+		"css/style.css",
+		"css/theme.css",
+		"css/empty.css"
+	];
+
+	cssFiles.forEach((source) => {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		linkElement.href = chrome.runtime.getURL(source);
+		document.head.appendChild(linkElement);
+	});
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
