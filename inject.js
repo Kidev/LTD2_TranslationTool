@@ -67,7 +67,14 @@ function dragElement(elem) {
 	}
 }
 
-function onWindowReady() {
+function injectCSS(source) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	linkElement.href = source;
+	document.head.appendChild(linkElement);
+}
+
+function injectPreviewIntoPage() {
 
 	const cssFiles = [
 		"inject.css",
@@ -79,50 +86,45 @@ function onWindowReady() {
 		"css/empty.css"
 	];
 
-	cssFiles.forEach((source) => {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		linkElement.href = chrome.runtime.getURL(source);
-		document.head.appendChild(linkElement);
-	});
+	cssFiles.forEach((source) => injectCSS(chrome.runtime.getURL(source)));
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
+
+	div.innerHTML =
+		`<div>` +
+		`<div id=\'dragDivHeader\'>` +
+		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coachs Translation Tool` +
+		`</div>` +
+		`<div id=\'dragDivTranslation\'>Click on a cell to see it like in game</div>` +
+		`</div>`;
+
+	div.style.display = 'block';
+
 	document.body.append(div);
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', chrome.runtime.getURL("preview_box.html"), true);
-	console.log(chrome.runtime.getURL("preview_box.html"));
-	xhr.onreadystatechange = function()
-	{
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			document.getElementById("dragDiv").innerHTML = xhr.responseText;
-			dragElement(document.getElementById("dragDiv"));
+	var target = document.querySelector('#t-formula-bar-input > .cell-input');
 
-			function addObserverIfDesiredNodeAvailable() {
+	var observer = new MutationObserver(function(mutations) {
+		document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+	});
+	observer.observe(target, {
+		attributes:    true,
+		childList:     true,
+		characterData: true
+	});
 
-				var target = document.querySelector('#t-formula-bar-input > .cell-input')
-
-				if (target === null) {
-					window.setTimeout(addObserverIfDesiredNodeAvailable,500);
-					return;
-				}
-
-				var observer = new MutationObserver(function(mutations) {
-					document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
-				});
-
-				observer.observe(target, {
-					attributes:    true,
-					childList:     true,
-					characterData: true
-				});
-			}
-			addObserverIfDesiredNodeAvailable();
-		}
-	};
-	xhr.send();
+	dragElement(document.getElementById("dragDiv"));
 }
 
-// When page is loaded
-window.onload = (event) => onWindowReady();
+var prevWinDiv = document.querySelector('#dragDiv');
+
+if (prevWinDiv === null) {
+	injectPreviewIntoPage();
+} else if (prevWinDiv.style.display === 'none') {
+	prevWinDiv.style.display = 'block';
+} else {
+	prevWinDiv.style.display = 'none';
+}
+
+
