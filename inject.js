@@ -74,51 +74,36 @@ function injectCSS(source) {
 	document.head.appendChild(linkElement);
 }
 
-function injectCSSSheet(sheetContent) {
-	var linkElement = document.createElement("style");
-	linkElement.innerHTML = sheetContent;
-	document.head.appendChild(linkElement);
-}
-
 function onWindowReady() {
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
+
+	div.innerHTML =
+		`<div>` +
+		`<div id=\'dragDivHeader\'>` +
+		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coachs Translation Tool` +
+		`</div>` +
+		`<div id=\'dragDivTranslation\'>Click on a cell to see it like in game</div>` +
+		`</div>`;
+
 	document.body.append(div);
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', chrome.runtime.getURL("preview_box.html"), true);
-	console.log(chrome.runtime.getURL("preview_box.html"));
-	xhr.onreadystatechange = function()
-	{
-		if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-			document.getElementById("dragDiv").innerHTML = xhr.responseText;
-			dragElement(document.getElementById("dragDiv"));
+	var target = document.querySelector('#t-formula-bar-input > .cell-input')
 
-			function addObserverIfDesiredNodeAvailable() {
+	var observer = new MutationObserver(function(mutations) {
+		document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+	});
+	observer.observe(target, {
+		attributes:    true,
+		childList:     true,
+		characterData: true
+	});
 
-				var target = document.querySelector('#t-formula-bar-input > .cell-input')
-
-				if (target === null) {
-					window.setTimeout(addObserverIfDesiredNodeAvailable,500);
-					return;
-				}
-
-				var observer = new MutationObserver(function(mutations) {
-					document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
-				});
-
-				observer.observe(target, {
-					attributes:    true,
-					childList:     true,
-					characterData: true
-				});
-			}
-			addObserverIfDesiredNodeAvailable();
-		}
-	};
-	xhr.send();
+	dragElement(document.getElementById("dragDiv"));
 }
 
 // When page is loaded
-window.onload = (event) => onWindowReady();
+//window.onload = (event) => onWindowReady();
+
+onWindowReady();
