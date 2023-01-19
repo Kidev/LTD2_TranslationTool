@@ -1,0 +1,28 @@
+{
+	"name": "LTD2 Translation Tool",
+	"manifest_version": 3,
+	"version": "1.9.2",
+	"description": "Provides in-game previews directly in Google Sheets, for Legion TD2 translators",
+	"permissions": [
+		"activeTab",
+		"scripting"
+	],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"icons": {
+		"32": "icon/icon-32.png",
+		"48": "icon/icon-48.png"
+	},
+	"action": {
+		"default_title": "Toggle Translation Tool",
+		"default_icon": "icon/icon-48.png"
+	},
+	"web_accessible_resources": [{
+		"resources": ["inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css"],
+		"matches": ["<all_urls>"]
+	},{
+		"resources": ["inject.js"],
+		"matches": ["<all_urls>"]
+	}]
+}
