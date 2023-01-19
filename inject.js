@@ -82,8 +82,7 @@ function injectPreviewIntoPage() {
 		"css/black-dashboard.css",
 		"css/flag-icon.css",
 		"css/style.css",
-		"css/theme.css",
-		"css/empty.css"
+		"css/theme.css"
 	];
 
 	cssFiles.forEach((source) => injectCSS(chrome.runtime.getURL(source)));
