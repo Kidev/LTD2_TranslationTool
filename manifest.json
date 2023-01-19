@@ -1,8 +1,8 @@
 {
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
-	"version": "1.7",
-	"description": "Adds quality of life features inside Google Sheets for Legion TD2's community translators, by providing in game previews of their translations in real time",
+	"version": "1.8",
+	"description": "Provides in-game previews directly in Google Sheets, for Legion TD2 translators",
 	"permissions": [
 		"activeTab",
 		"scripting"
