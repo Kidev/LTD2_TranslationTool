@@ -22,7 +22,7 @@
 		"resources": ["fonts/nucleo.woff2", "fonts/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2", "fonts/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2", "fonts/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2", "fonts/pxiEyp8kv8JHgFVrJJfecg.woff2"],
 		"matches": ["<all_urls>"]
 	},{
-		"resources": [ "inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css", "css/empty.css" ],
+		"resources": ["inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css", "css/empty.css"],
 		"matches": ["<all_urls>"]
 	},{
 		"resources": ["inject.js"],
