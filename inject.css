@@ -5,7 +5,7 @@
 	text-align: left;
 	top: 5%;
 	left: 5%;
-	width: auto;
+	width: 400px;
 	max-width: 400px;
 	max-height: 1000px;
 	height: auto;
@@ -14,6 +14,7 @@
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-top-right-radius: 5px;
+	overflow-x: hidden;
 }
 
 #dragDivHeader {
@@ -22,7 +23,8 @@
 	color: white;
 	font-family: 'Poppins',sans-serif;
 	text-align: left;
-	horiz-align: center;
+	/*horiz-align: center;*/
+	vertical-align: center;
 	background-color:  #27293d;
 	border-top-right-radius: 5px;
 	padding-right: 5px;
