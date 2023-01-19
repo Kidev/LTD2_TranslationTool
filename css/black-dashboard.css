@@ -3630,17 +3630,9 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     background-color: #1d8cf8
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA4IDgnPjxwYXRoIGZpbGw9JyNmZmZmZmYnIGQ9J002LjU2NC43NWwtMy41OSAzLjYxMi0xLjUzOC0xLjU1TDAgNC4yNiAyLjk3NCA3LjI1IDggMi4xOTN6Jy8+PC9zdmc+)
-}
-
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
     background-color: #1d8cf8;
     box-shadow: none
-}
-
-.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0IDQnPjxwYXRoIHN0cm9rZT0nI2ZmZmZmZicgZD0nTTAgMmg0Jy8+PC9zdmc+)
 }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
@@ -3659,10 +3651,6 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     background-color: #1d8cf8
 }
 
-.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9Jy00IC00IDggOCc+PGNpcmNsZSByPSczJyBmaWxsPScjZmZmZmZmJy8+PC9zdmc+)
-}
-
 .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
     background-color: rgba(225, 78, 202, .5)
 }
@@ -3675,7 +3663,7 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     line-height: 1.428571;
     color: rgba(255, 255, 255, .8);
     vertical-align: middle;
-    background: transparent url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0IDUnPjxwYXRoIGZpbGw9JyMzMjMyNWQnIGQ9J00yIDBMMCAyaDR6bTAgNUwwIDNoNHonLz48L3N2Zz4=) no-repeat right .75rem center;
+    background: transparent no-repeat right .75rem center;
     background-size: 8px 10px;
     border: 1px solid #cad1d7;
     border-radius: .25rem;
@@ -4335,10 +4323,6 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
     border-color: transparent
 }
 
-.navbar-light .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml !default;charset=utf8;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDM0LCA0MiwgNjYsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+")
-}
-
 .navbar-light .navbar-text {
     color: rgba(34, 42, 66, .5)
 }
@@ -4378,10 +4362,6 @@ input[type=submit].btn-block, input[type=reset].btn-block, input[type=button].bt
 .navbar-dark .navbar-toggler {
     color: rgba(255, 255, 255, .95);
     border-color: transparent
-}
-
-.navbar-dark .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuOTUpJyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLW1pdGVybGltaXQ9JzEwJyBkPSdNNCA3aDIyTTQgMTVoMjJNNCAyM2gyMicvPjwvc3ZnPg==)
 }
 
 .navbar-dark .navbar-text {
@@ -6069,14 +6049,6 @@ button.close {
     height: 20px;
     background: transparent no-repeat center center;
     background-size: 100% 100%
-}
-
-.carousel-control-prev-icon {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9JyNmZmZmZmYnIHZpZXdCb3g9JzAgMCA4IDgnPjxwYXRoIGQ9J001LjI1IDBsLTQgNCA0IDQgMS41LTEuNS0yLjUtMi41IDIuNS0yLjUtMS41LTEuNXonLz48L3N2Zz4=)
-}
-
-.carousel-control-next-icon {
-    background-image: url(data:image/svg+xml;charset=utf8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9JyNmZmZmZmYnIHZpZXdCb3g9JzAgMCA4IDgnPjxwYXRoIGQ9J00yLjc1IDBsLTEuNSAxLjUgMi41IDIuNS0yLjUgMi41IDEuNSAxLjUgNC00LTQtNHonLz48L3N2Zz4=)
 }
 
 .carousel-indicators {
@@ -13305,18 +13277,9 @@ hr {
 }
 
 table.tablesorter thead tr .header {
-    background-image: url(../img/bg.gif);
     background-repeat: no-repeat;
     background-position: center right;
     cursor: pointer
-}
-
-table.tablesorter thead tr .headerSortUp {
-    background-image: url(../img/asc.gif)
-}
-
-table.tablesorter thead tr .headerSortDown {
-    background-image: url(../img/desc.gif)
 }
 
 .dataTables_wrapper .table-striped tbody tr:nth-of-type(odd) {
@@ -16342,7 +16305,6 @@ Copyright (c) 2015 Daniel Eden*/
 
 .card-register.card-white:before {
     content: ' ';
-    background: url(../img/YozoraBackground.png);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
