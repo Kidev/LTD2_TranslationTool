@@ -74,7 +74,19 @@ function injectCSS(source) {
 	document.head.appendChild(linkElement);
 }
 
-function onWindowReady() {
+function injectPreviewIntoPage() {
+
+	const cssFiles = [
+		"inject.css",
+		"css/btf.css",
+		"css/black-dashboard.css",
+		"css/flag-icon.css",
+		"css/style.css",
+		"css/theme.css",
+		"css/empty.css"
+	];
+
+	cssFiles.forEach((source) => injectCSS(chrome.runtime.getURL(source)));
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -87,9 +99,11 @@ function onWindowReady() {
 		`<div id=\'dragDivTranslation\'>Click on a cell to see it like in game</div>` +
 		`</div>`;
 
+	div.style.display = 'block';
+
 	document.body.append(div);
 
-	var target = document.querySelector('#t-formula-bar-input > .cell-input')
+	var target = document.querySelector('#t-formula-bar-input > .cell-input');
 
 	var observer = new MutationObserver(function(mutations) {
 		document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
@@ -103,7 +117,14 @@ function onWindowReady() {
 	dragElement(document.getElementById("dragDiv"));
 }
 
-// When page is loaded
-//window.onload = (event) => onWindowReady();
+var prevWinDiv = document.querySelector('#dragDiv');
 
-onWindowReady();
+if (prevWinDiv === null) {
+	injectPreviewIntoPage();
+} else if (prevWinDiv.style.display === 'none') {
+	prevWinDiv.style.display = 'block';
+} else {
+	prevWinDiv.style.display = 'none';
+}
+
+

@@ -1,7 +1,7 @@
 {
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
-	"version": "1.3",
+	"version": "1.7",
 	"description": "Adds cool quality of life features to Google Sheet to help translators of Legion TD 2",
 	"permissions": [
 		"activeTab",
@@ -19,9 +19,6 @@
 		"default_icon": "icon/icon-48.png"
 	},
 	"web_accessible_resources": [{
-		"resources": ["preview_box.html"],
-		"matches": ["<all_urls>"]
-	},{
 		"resources": ["fonts/nucleo.woff2", "fonts/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2", "fonts/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2", "fonts/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2", "fonts/pxiEyp8kv8JHgFVrJJfecg.woff2"],
 		"matches": ["<all_urls>"]
 	},{
