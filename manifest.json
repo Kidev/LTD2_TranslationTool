@@ -2,7 +2,7 @@
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
 	"version": "1.7",
-	"description": "Adds quality of life features to Google Sheet: by providing in game previews, it helps translators of Legion TD 2",
+	"description": "Adds quality of life features inside Google Sheets for Legion TD2's community translators, by providing in game previews of their translations in real time",
 	"permissions": [
 		"activeTab",
 		"scripting"
@@ -15,7 +15,7 @@
 		"48": "icon/icon-48.png"
 	},
 	"action": {
-		"default_title": "Toggle Coach's Translation Tool for current tab",
+		"default_title": "Toggle Translation Tool",
 		"default_icon": "icon/icon-48.png"
 	},
 	"web_accessible_resources": [{
