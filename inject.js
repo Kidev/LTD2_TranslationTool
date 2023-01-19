@@ -90,12 +90,14 @@ function injectPreviewIntoPage() {
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
 
+	const emptyCell = `<span style="font-style: italic">Click on a cell to see it like in game</span>`;
+
 	div.innerHTML =
 		`<div>` +
 		`<div id=\'dragDivHeader\'>` +
 		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coach's Translation Tool` +
 		`</div>` +
-		`<div id=\'dragDivTranslation\'>Click on a cell to see it like in game</div>` +
+		`<div id=\'dragDivTranslation\'>` + emptyCell + `</div>` +
 		`</div>`;
 
 	div.style.display = 'block';
@@ -105,7 +107,11 @@ function injectPreviewIntoPage() {
 	var target = document.querySelector('#t-formula-bar-input > .cell-input');
 
 	var observer = new MutationObserver(function(mutations) {
-		document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+		if (target.innerText.trim().startsWith("last updated") || target.innerText.trim().length <= 0) {
+			document.getElementById("dragDivTranslation").innerHTML = emptyCell;
+		} else {
+			document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+		}
 	});
 	observer.observe(target, {
 		attributes:    true,
