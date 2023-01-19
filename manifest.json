@@ -19,7 +19,7 @@
 		"default_icon": "icon/icon-48.png"
 	},
 	"web_accessible_resources": [{
-		"resources": ["inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css", "css/empty.css"],
+		"resources": ["inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css"],
 		"matches": ["<all_urls>"]
 	},{
 		"resources": ["inject.js"],

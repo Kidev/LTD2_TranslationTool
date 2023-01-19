@@ -93,7 +93,7 @@ function injectPreviewIntoPage() {
 	div.innerHTML =
 		`<div>` +
 		`<div id=\'dragDivHeader\'>` +
-		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coachs Translation Tool` +
+		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coach's Translation Tool` +
 		`</div>` +
 		`<div id=\'dragDivTranslation\'>Click on a cell to see it like in game</div>` +
 		`</div>`;
