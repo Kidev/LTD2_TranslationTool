@@ -4,12 +4,13 @@
 	"version": "1.9.2",
 	"description": "Provides in-game previews directly in Google Sheets, for Legion TD2 translators",
 	"author": "Kidev",
+	"homepage_url": "https://github.com/Kidev/LTD2_TranslationTool",
 	"permissions": [
 		"activeTab",
 		"scripting"
 	],
 	"background": {
-		"service_worker": "background.js"
+		"scripts": ["background.js"]
 	},
 	"icons": {
 		"32": "icon/icon-32.png",
