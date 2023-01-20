@@ -5,9 +5,6 @@ powershell -Command "del .\CoachTranslateTool_chrome.zip -Force"
 powershell -Command "mkdir .\build\firefox"
 powershell -Command "mkdir .\build\chrome"
 
-powershell -Command "Copy-Item -Recurse -Path .\common\* -Destination .\build\firefox"
-powershell -Command "Copy-Item -Recurse -Path .\common\* -Destination .\build\chrome"
-
 powershell -Command "Copy-Item -Recurse -Path .\firefox\* -Destination .\build\firefox"
 powershell -Command "Copy-Item -Recurse -Path .\chrome\* -Destination .\build\chrome"
 
