@@ -67,25 +67,7 @@ function dragElement(elem) {
 	}
 }
 
-function injectCSS(source) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	linkElement.href = source;
-	document.head.appendChild(linkElement);
-}
-
 function injectPreviewIntoPage() {
-
-	const cssFiles = [
-		"inject.css",
-		"css/btf.css",
-		"css/black-dashboard.css",
-		"css/flag-icon.css",
-		"css/style.css",
-		"css/theme.css"
-	];
-
-	cssFiles.forEach((source) => injectCSS(source));
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -122,8 +104,29 @@ function injectPreviewIntoPage() {
 	dragElement(document.getElementById("dragDiv"));
 }
 
-var prevWinDiv = document.querySelector('#dragDiv');
+console.error("INJECTED JS");
 
+browser.tabs.getCurrent().then(async (tab) => {
+	console.error("INJECT CSS");
+	try {
+		await browser.scripting.insertCSS({
+			target: { tabId: tab.id },
+			files: [
+				"inject.css",
+				"css/btf.css",
+				"css/black-dashboard.css",
+				"css/flag-icon.css",
+				"css/style.css",
+				"css/theme.css"
+			] //.map(source => browser.runtime.getURL(source))
+		});
+	} catch (err) {
+		console.error(`Failed to inject CSS (${err})`);
+	}
+}, (err) => console.log(`Promise Error: ${err}`));
+
+
+var prevWinDiv = document.querySelector('#dragDiv');
 if (prevWinDiv === null) {
 	injectPreviewIntoPage();
 } else if (prevWinDiv.style.display === 'none') {

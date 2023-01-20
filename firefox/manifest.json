@@ -1,7 +1,7 @@
 {
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
-	"version": "1.9.2",
+	"version": "1.9.4",
 	"description": "Provides in-game previews directly in Google Sheets, for Legion TD2 translators",
 	"author": "Kidev",
 	"homepage_url": "https://github.com/Kidev/LTD2_TranslationTool",
@@ -14,11 +14,16 @@
 	},
 	"icons": {
 		"32": "icon/icon-32.png",
+		"38": "icon/icon-38.png",
 		"48": "icon/icon-48.png"
 	},
 	"action": {
-		"default_title": "Toggle Translation Tool",
-		"default_icon": "icon/icon-48.png"
+		"default_icon": {
+			"32": "icon/icon-32.png",
+			"38": "icon/icon-38.png",
+			"48": "icon/icon-48.png"
+		},
+		"default_title": "Toggle Translation Tool"
 	},
 	"web_accessible_resources": [{
 		"resources": ["inject.css", "css/btf.css", "css/black-dashboard.css", "css/flag-icon.css", "css/style.css", "css/theme.css"],
