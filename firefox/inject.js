@@ -85,7 +85,7 @@ function injectPreviewIntoPage() {
 		"css/theme.css"
 	];
 
-	cssFiles.forEach((source) => injectCSS(source));
+	cssFiles.forEach((source) => injectCSS(browser.runtime.getURL(source)));
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");

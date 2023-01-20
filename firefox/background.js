@@ -1,4 +1,4 @@
-browser.browserAction.onClicked.addListener(async (tab) => {
+browser.action.onClicked.addListener(async (tab) => {
     if (tab.url.includes("https://docs.google.com/spreadsheets/")) {
         try {
             await browser.scripting.executeScript({
@@ -6,7 +6,7 @@ browser.browserAction.onClicked.addListener(async (tab) => {
                     tabId: tab.id,
                     allFrames: true,
                 },
-                files: ["inject.js"],
+                files: ["inject.js"].map((source) => browser.runtime.getURL(source))
             });
         } catch (err) {
             console.error(`Failed to inject script (${err})`);
