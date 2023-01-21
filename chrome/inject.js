@@ -76,7 +76,7 @@ function injectCSS(source) {
 
 function injectPreviewIntoPage() {
 
-	injectCSS("inject.css");
+	injectCSS(chrome.runtime.getURL("inject.css"));
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -86,7 +86,7 @@ function injectPreviewIntoPage() {
 	div.innerHTML =
 		`<div>` +
 		`<div id=\'dragDivHeader\'>` +
-		`<img alt=\'coach\' src=\'icon-48.png\' />&nbsp;&nbsp;Coach's Translation Tool` +
+		`<img alt=\'coach\' src=\'${chrome.runtime.getURL("icon-48.png")}\' />&nbsp;&nbsp;Coach's Translation Tool` +
 		`</div>` +
 		`<div id=\'dragDivTranslation\'>` + emptyCell + `</div>` +
 		`</div>`;
