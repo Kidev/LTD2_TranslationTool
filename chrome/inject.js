@@ -76,16 +76,7 @@ function injectCSS(source) {
 
 function injectPreviewIntoPage() {
 
-	const cssFiles = [
-		"inject.css",
-		"css/btf.css",
-		"css/black-dashboard.css",
-		"css/flag-icon.css",
-		"css/style.css",
-		"css/theme.css"
-	];
-
-	cssFiles.forEach((source) => injectCSS(chrome.runtime.getURL(source)));
+	injectCSS("inject.css");
 
 	var div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
