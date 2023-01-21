@@ -67,51 +67,50 @@ function dragElement(elem) {
 	}
 }
 
-function injectCSS(source) {
-	let linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	linkElement.href = source;
-	document.head.appendChild(linkElement);
+function getSpanStrFor(cell_data) {
+	if (cell_data.startsWith("last updated") || cell_data.length <= 0) {
+		return `<span id="spanEmptyCell" style="font-style: italic">Click on a cell to see it like in game</span>`;
+	}
+	return `<span id="spanPreviewCell">${replaceSpecialCharsInText(cell_data)}</span>`;
 }
 
 function injectPreviewIntoPage() {
 
-	injectCSS(browser.runtime.getURL("inject.css"));
+	let linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	linkElement.href = browser.runtime.getURL("inject.css");
+	document.head.appendChild(linkElement);
 
 	let div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
 
-	const emptyCell = `<span style="font-style: italic">Click on a cell to see it like in game</span>`;
-
-	div.innerHTML =
-		`<div>` +
+	const innerStr =
 		`<div id=\'dragDivHeader\'>` +
 		`<img alt=\'coach\' src=\'${browser.runtime.getURL("icon-48.png")}\' />&nbsp;&nbsp;Coach's Translation Tool` +
 		`</div>` +
-		`<div id=\'dragDivTranslation\'>` + emptyCell + `</div>` +
-		`</div>`;
+		`<div id=\'dragDivTranslation\'></div>`;
 
+	let innerDOM = Parser.parseFromString(innerStr, 'text/html');
+
+	div.appendChild(innerDOM);
 	div.style.display = 'block';
-
 	document.body.append(div);
 
 	let target = document.querySelector('#t-formula-bar-input > .cell-input');
 
 	let observer = new MutationObserver(function(mutations) {
-		if (target.innerText.trim().startsWith("last updated") || target.innerText.trim().length <= 0) {
-			document.getElementById("dragDivTranslation").innerHTML = emptyCell;
-		} else {
-			document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
-		}
+		const spanDOM = Parser.parseFromString(getSpanStrFor(target.innerText.trim()), 'text/html');
+		document.getElementById("dragDivTranslation").replaceChildren(spanDOM);
 	});
+
 	observer.observe(target, {
-		attributes:    true,
-		childList:     true,
 		characterData: true
 	});
 
 	dragElement(document.getElementById("dragDiv"));
 }
+
+const Parser = new DOMParser();
 
 let prevWinDiv = document.querySelector('#dragDiv');
 
