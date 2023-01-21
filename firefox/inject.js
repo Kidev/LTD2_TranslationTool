@@ -76,16 +76,7 @@ function injectCSS(source) {
 
 function injectPreviewIntoPage() {
 
-	const cssFiles = [
-		"inject.css",
-		"css/btf.css",
-		"css/black-dashboard.css",
-		"css/flag-icon.css",
-		"css/style.css",
-		"css/theme.css"
-	];
-
-	cssFiles.forEach((source) => injectCSS(browser.runtime.getURL(source)));
+	injectCSS(browser.runtime.getURL("inject.css"));
 
 	let div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
@@ -95,7 +86,7 @@ function injectPreviewIntoPage() {
 	div.innerHTML =
 		`<div>` +
 		`<div id=\'dragDivHeader\'>` +
-		`<img alt=\'coach\' src=\'https://cdn.legiontd2.com/icons/Coach/StandardGameCoach40.png\' />&nbsp;&nbsp;Coach's Translation Tool` +
+		`<img alt=\'coach\' src=\'${browser.runtime.getURL("icon-48.png")}\' />&nbsp;&nbsp;Coach's Translation Tool` +
 		`</div>` +
 		`<div id=\'dragDivTranslation\'>` + emptyCell + `</div>` +
 		`</div>`;
