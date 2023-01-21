@@ -1,6 +1,6 @@
 function replaceSpecialCharsInText(str_in) {
 
-	var result = str_in;
+	let result = str_in;
 	result = result.replace(/&/g,"&amp;");
 	result = result.replace(/\</g,"&lt;");
 	result = result.replace(/\>/g,"&gt;");
@@ -33,7 +33,7 @@ function replaceSpecialCharsInText(str_in) {
 
 function dragElement(elem) {
 	
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+	let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
 	if (document.getElementById(elem.id)) {
 		document.getElementById(elem.id).onmousedown = dragMouseDown;
@@ -68,7 +68,7 @@ function dragElement(elem) {
 }
 
 function injectCSS(source) {
-	var linkElement = document.createElement("link");
+	let linkElement = document.createElement("link");
 	linkElement.rel = "stylesheet";
 	linkElement.href = source;
 	document.head.appendChild(linkElement);
@@ -87,7 +87,7 @@ function injectPreviewIntoPage() {
 
 	cssFiles.forEach((source) => injectCSS(browser.runtime.getURL(source)));
 
-	var div = document.createElement("div");
+	let div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
 
 	const emptyCell = `<span style="font-style: italic">Click on a cell to see it like in game</span>`;
@@ -104,9 +104,9 @@ function injectPreviewIntoPage() {
 
 	document.body.append(div);
 
-	var target = document.querySelector('#t-formula-bar-input > .cell-input');
+	let target = document.querySelector('#t-formula-bar-input > .cell-input');
 
-	var observer = new MutationObserver(function(mutations) {
+	let observer = new MutationObserver(function(mutations) {
 		if (target.innerText.trim().startsWith("last updated") || target.innerText.trim().length <= 0) {
 			document.getElementById("dragDivTranslation").innerHTML = emptyCell;
 		} else {
@@ -122,7 +122,7 @@ function injectPreviewIntoPage() {
 	dragElement(document.getElementById("dragDiv"));
 }
 
-var prevWinDiv = document.querySelector('#dragDiv');
+let prevWinDiv = document.querySelector('#dragDiv');
 
 if (prevWinDiv === null) {
 	injectPreviewIntoPage();
