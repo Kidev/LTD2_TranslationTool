@@ -107,7 +107,8 @@ img.powerup {
     border: 1px solid #FFCC00;
 }
 
-img.emoji-icon-big .output-line img.emoji-icon-big {
+img.emoji-icon-big .output-line,
+img.emoji-icon-big {
     height: 36px;
     vertical-align: middle;
     margin: 2px 0px;

@@ -84,21 +84,31 @@ function injectPreviewIntoPage() {
 	let div = document.createElement("div");
 	div.setAttribute("id", "dragDiv");
 
-	const innerStr =
-		`<div id=\'dragDivHeader\'>` +
-		`<img alt=\'coach\' src=\'${browser.runtime.getURL("icon-48.png")}\' />&nbsp;&nbsp;Coach's Translation Tool` +
-		`</div>` +
-		`<div id=\'dragDivTranslation\'></div>`;
+	const Parser = new DOMParser();
 
-	let innerDOM = Parser.parseFromString(innerStr, 'text/html');
+	let divHeader = document.createElement('div', {id: 'dragDivHeader'});
+	let headerImg = document.createElement('img', {alt: 'coach', src: 'browser.runtime.getURL("icon-48.png")'});
+	let divTranslate = document.createElement('div', {id: 'dragDivTranslation'});
+
+	divTranslate.appendChild(Parser.parseFromString(getSpanStrFor("")), 'text/html');
+
+	divHeader.appendChild(headerImg);
+	divHeader.appendChild(document.createTextNode("&nbsp;&nbsp;Coach's Translation Tool"));
+
+	div.appendChild(divHeader);
+	div.appendChild(divTranslate);
+
+	document.appendChild(div);
 
 	div.appendChild(innerDOM);
 	div.style.display = 'block';
-	document.body.append(div);
+
+	document.appendChild(div);
 
 	let target = document.querySelector('#t-formula-bar-input > .cell-input');
 
 	let observer = new MutationObserver(function(mutations) {
+		const Parser = new DOMParser();
 		const spanDOM = Parser.parseFromString(getSpanStrFor(target.innerText.trim()), 'text/html');
 		document.getElementById("dragDivTranslation").replaceChildren(spanDOM);
 	});
@@ -112,18 +122,12 @@ function injectPreviewIntoPage() {
 	dragElement(document.getElementById("dragDiv"));
 }
 
-function onScriptInjected() {
-	let prevWinDiv = document.querySelector('#dragDiv');
+let prevWinDiv = document.querySelector('#dragDiv');
 
-	if (prevWinDiv === null) {
-		injectPreviewIntoPage();
-	} else if (prevWinDiv.style.display === 'none') {
-		prevWinDiv.style.display = 'block';
-	} else {
-		prevWinDiv.style.display = 'none';
-	}
+if (prevWinDiv === null) {
+	injectPreviewIntoPage();
+} else if (prevWinDiv.style.display === 'none') {
+	prevWinDiv.style.display = 'block';
+} else {
+	prevWinDiv.style.display = 'none';
 }
-
-const Parser = new DOMParser();
-
-onScriptInjected();
