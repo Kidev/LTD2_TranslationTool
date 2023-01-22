@@ -4,9 +4,9 @@ browser.action.onClicked.addListener(async (tab) => {
             await browser.scripting.executeScript({
                 target: {
                     tabId: tab.id,
-                    allFrames: true,
+                    allFrames: true
                 },
-                files: ["inject.js"].map((source) => browser.runtime.getURL(source))
+                files: [browser.runtime.getURL("inject.js")]
             });
         } catch (err) {
             console.error(`Failed to inject script (${err})`);

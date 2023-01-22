@@ -110,16 +110,20 @@ function injectPreviewIntoPage() {
 	dragElement(document.getElementById("dragDiv"));
 }
 
-const Parser = new DOMParser();
+function onScriptInjected() {
+	let prevWinDiv = document.querySelector('#dragDiv');
 
-let prevWinDiv = document.querySelector('#dragDiv');
+	if (prevWinDiv === null) {
+		injectPreviewIntoPage();
+	} else if (prevWinDiv.style.display === 'none') {
+		prevWinDiv.style.display = 'block';
+	} else {
+		prevWinDiv.style.display = 'none';
+	}
 
-if (prevWinDiv === null) {
-	injectPreviewIntoPage();
-} else if (prevWinDiv.style.display === 'none') {
-	prevWinDiv.style.display = 'block';
-} else {
-	prevWinDiv.style.display = 'none';
+	return 0;
 }
 
+const Parser = new DOMParser();
 
+onScriptInjected();
