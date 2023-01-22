@@ -1,8 +1,8 @@
 {
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
-	"version": "1.9.8",
-	"description": "Provides in-game previews directly in Google Sheets, for Legion TD2 translators",
+	"version": "1.10.0",
+	"description": "Adds to GoogleSheets in Chrome an in-game preview of translation strings for LegionTD2",
 	"author": "Kidev",
 	"homepage_url": "https://github.com/Kidev/LTD2_TranslationTool",
 	"permissions": [

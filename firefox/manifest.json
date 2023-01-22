@@ -2,7 +2,7 @@
 	"name": "LTD2 Translation Tool",
 	"manifest_version": 3,
 	"version": "1.10.0",
-	"description": "Provides in Firefox of an in-game reviews",
+	"description": "Adds to GoogleSheets in Firefox an in-game preview of translation strings for LegionTD2",
 	"author": "Kidev",
 	"homepage_url": "https://github.com/Kidev/LTD2_TranslationTool",
 	"permissions": [
