@@ -119,7 +119,6 @@ img.emoji-icon-big .output-line img.emoji-icon-big {
     position: relative;
     height: 7px;
     width: 7px;
-    background-image: url('../img/small-icons/tiny_x.png');
     background-size: contain;
     display: inline-block;
     top: -9px;
@@ -220,4 +219,25 @@ img.half-icon {
     vertical-align: middle;
     margin: 2px 0px;
     padding: 0px 0px 2px 0px;
+}
+
+.flag-icon-background {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+.flag-icon {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    line-height: 28px;
+}
+.flag-icon:before {
+    content: "\00a0";
+}
+.flag-icon.flag-icon-squared {
+    width: 1em;
 }
