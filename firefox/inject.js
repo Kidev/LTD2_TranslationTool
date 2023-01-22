@@ -104,6 +104,8 @@ function injectPreviewIntoPage() {
 	});
 
 	observer.observe(target, {
+		attributes:    true,
+		childList:     true,
 		characterData: true
 	});
 
@@ -120,8 +122,6 @@ function onScriptInjected() {
 	} else {
 		prevWinDiv.style.display = 'none';
 	}
-
-	return 0;
 }
 
 const Parser = new DOMParser();
