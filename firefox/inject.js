@@ -81,36 +81,32 @@ function injectPreviewIntoPage() {
 	linkElement.href = browser.runtime.getURL("inject.css");
 	document.head.appendChild(linkElement);
 
-	let div = document.createElement("div");
-	div.setAttribute("id", "dragDiv");
-
-	const Parser = new DOMParser();
+	let div = document.createElement('div', {id: 'dragDiv'});
 
 	let divHeader = document.createElement('div', {id: 'dragDivHeader'});
-	let headerImg = document.createElement('img', {alt: 'coach', src: 'browser.runtime.getURL("icon-48.png")'});
+	let headerImg = document.createElement('img', {id: 'dragDivHeaderImg', alt: 'coach', src: 'browser.runtime.getURL("icon-48.png")'});
 	let divTranslate = document.createElement('div', {id: 'dragDivTranslation'});
-
-	divTranslate.appendChild(Parser.parseFromString(getSpanStrFor("")), 'text/html');
 
 	divHeader.appendChild(headerImg);
 	divHeader.appendChild(document.createTextNode("&nbsp;&nbsp;Coach's Translation Tool"));
 
+	divTranslate.appendChild(new DOMParser().parseFromString(getSpanStrFor("")), 'text/html');
+
 	div.appendChild(divHeader);
 	div.appendChild(divTranslate);
 
-	document.appendChild(div);
-
-	div.appendChild(innerDOM);
 	div.style.display = 'block';
 
-	document.appendChild(div);
+	document.body.appendChild(div);
 
 	let target = document.querySelector('#t-formula-bar-input > .cell-input');
 
+	console.error("LTD2: calling the observer");
+
 	let observer = new MutationObserver(function(mutations) {
-		const Parser = new DOMParser();
-		const spanDOM = Parser.parseFromString(getSpanStrFor(target.innerText.trim()), 'text/html');
-		document.getElementById("dragDivTranslation").replaceChildren(spanDOM);
+		document.getElementById("dragDivTranslation")
+			.replaceChildren(new DOMParser().parseFromString(getSpanStrFor(target.innerText.trim()), 'text/html'));
+		console.error("LTD2: observer updated");
 	});
 
 	observer.observe(target, {
@@ -120,7 +116,24 @@ function injectPreviewIntoPage() {
 	});
 
 	dragElement(document.getElementById("dragDiv"));
+
+	console.log("LTD2: INJECTED FINISHED");
 }
+
+console.log("LTD2: INJECTED INTO PAGE");
+
+/*
+<div class=.cell-input id=#t-formula-bar-input>
+	<div id=dragDiv>
+		<div id=dragDivHeader>
+			<img id=dragDivHeaderImg alt=coach src=browser.runtime.getURL("icon-48.png")>
+		</div>
+		<div id=divTranslate>
+		</div>
+	</div>
+</div>
+*/
+
 
 let prevWinDiv = document.querySelector('#dragDiv');
 
