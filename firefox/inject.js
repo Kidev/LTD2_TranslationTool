@@ -67,11 +67,10 @@ function dragElement(elem) {
 	}
 }
 
-function getSpanStrFor(cell_data) {
-	if (cell_data.startsWith("last updated") || cell_data.length <= 0) {
-		return `<span id="spanEmptyCell" style="font-style: italic">Click on a cell to see it like in game</span>`;
-	}
-	return `<span id="spanPreviewCell">${replaceSpecialCharsInText(cell_data)}</span>`;
+function parseInnerHTML(elem, value="<span style=\'font-style: italic\'>Click on a cell to see it like in game</span>") {
+	const parser = new window.DOMParser(window);
+	const parsedDoc = parser.parseFromString(`<div id="parsedContentTotalDiv">${value}</div>`, 'text/html');
+	elem.replaceChildren(parsedDoc.getElementById("parsedContentTotalDiv"));
 }
 
 function injectPreviewIntoPage() {
@@ -81,32 +80,48 @@ function injectPreviewIntoPage() {
 	linkElement.href = browser.runtime.getURL("inject.css");
 	document.head.appendChild(linkElement);
 
-	let div = document.createElement('div', {id: 'dragDiv'});
+	let div = document.createElement('div');
+	div.setAttribute("id", "dragDiv");
 
-	let divHeader = document.createElement('div', {id: 'dragDivHeader'});
-	let headerImg = document.createElement('img', {id: 'dragDivHeaderImg', alt: 'coach', src: 'browser.runtime.getURL("icon-48.png")'});
-	let divTranslate = document.createElement('div', {id: 'dragDivTranslation'});
+	document.body.append(div);
 
-	divHeader.appendChild(headerImg);
-	divHeader.appendChild(document.createTextNode("&nbsp;&nbsp;Coach's Translation Tool"));
-
-	divTranslate.appendChild(new DOMParser().parseFromString(getSpanStrFor("")), 'text/html');
+	let divHeader = document.createElement('div');
+	divHeader.setAttribute("id", "dragDivHeader");
 
 	div.appendChild(divHeader);
+
+	let headerImg = document.createElement('img');
+	headerImg.setAttribute("id", "dragDivHeaderImg");
+	headerImg.setAttribute("alt", "coach");
+	headerImg.setAttribute("src", browser.runtime.getURL("icon-48.png"));
+
+	let divTranslate = document.createElement('div');
+	divTranslate.setAttribute("id", "dragDivTranslation");
+
+	let spanCellText = document.createElement('span');
+	spanCellText.setAttribute("id", "spanCellTranslatedText");
+	parseInnerHTML(spanCellText);
+
 	div.appendChild(divTranslate);
+
+	divHeader.appendChild(headerImg);
+	divHeader.appendChild(document.createTextNode("  Coach's Translation Tool"));
+
+	divTranslate.appendChild(spanCellText);
 
 	div.style.display = 'block';
 
-	document.body.appendChild(div);
-
 	let target = document.querySelector('#t-formula-bar-input > .cell-input');
 
-	console.error("LTD2: calling the observer");
-
 	let observer = new MutationObserver(function(mutations) {
-		document.getElementById("dragDivTranslation")
-			.replaceChildren(new DOMParser().parseFromString(getSpanStrFor(target.innerText.trim()), 'text/html'));
-		console.error("LTD2: observer updated");
+		const strToWatch = target.innerText.trim();
+		const spanCell = document.getElementById("spanCellTranslatedText");
+
+		if (strToWatch.startsWith("last updated") || strToWatch.length <= 0) {
+			parseInnerHTML(spanCell);
+		} else {
+			parseInnerHTML(spanCell, replaceSpecialCharsInText(strToWatch));
+		}
 	});
 
 	observer.observe(target, {
@@ -116,24 +131,7 @@ function injectPreviewIntoPage() {
 	});
 
 	dragElement(document.getElementById("dragDiv"));
-
-	console.log("LTD2: INJECTED FINISHED");
 }
-
-console.log("LTD2: INJECTED INTO PAGE");
-
-/*
-<div class=.cell-input id=#t-formula-bar-input>
-	<div id=dragDiv>
-		<div id=dragDivHeader>
-			<img id=dragDivHeaderImg alt=coach src=browser.runtime.getURL("icon-48.png")>
-		</div>
-		<div id=divTranslate>
-		</div>
-	</div>
-</div>
-*/
-
 
 let prevWinDiv = document.querySelector('#dragDiv');
 
