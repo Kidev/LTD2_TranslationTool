@@ -1,6 +1,6 @@
 function replaceSpecialCharsInText(str_in) {
 
-	var result = str_in;
+	let result = str_in;
 	result = result.replace(/&/g,"&amp;");
 	result = result.replace(/\</g,"&lt;");
 	result = result.replace(/\>/g,"&gt;");
@@ -27,13 +27,13 @@ function replaceSpecialCharsInText(str_in) {
 	result = result.replace(/\|flag\(([a-zA-Z0-9\/\-._]+)\)/g,"<span class='simple-tooltip flag-icon small flag-icon-$1'><span class='tooltiptext narrow'>Country name</span></span>");
 	result = result.replace(/\|c\(([a-zA-Z0-9]{6})\):(.*?)\|r/g,"<span style='color: #$1'>$2</span>");
 	result = result.replace(/:([a-z]+):/g,"<img class='emoji-icon' src='https://cdn.legiontd2.com/emotes/$1.png' />");
-	
+
 	return result;
 }
 
 function dragElement(elem) {
-	
-	var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+	let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
 	if (document.getElementById(elem.id)) {
 		document.getElementById(elem.id).onmousedown = dragMouseDown;
@@ -67,43 +67,67 @@ function dragElement(elem) {
 	}
 }
 
-function injectCSS(source) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	linkElement.href = source;
-	document.head.appendChild(linkElement);
+function parseInnerHTML(elem, value="<span style=\'font-style: italic\'>Click on a cell to see it like in game</span>") {
+	const parser = new window.DOMParser(window);
+	const parsedDoc = parser.parseFromString(`<div id="parsedContentTotalDiv">${value}</div>`, 'text/html');
+	elem.replaceChildren(parsedDoc.getElementById("parsedContentTotalDiv"));
 }
 
 function injectPreviewIntoPage() {
 
-	injectCSS(chrome.runtime.getURL("inject.css"));
+	let linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	linkElement.href = chrome.runtime.getURL("inject.css");
+	document.head.appendChild(linkElement);
 
-	var div = document.createElement("div");
+	let div = document.createElement('div');
 	div.setAttribute("id", "dragDiv");
-
-	const emptyCell = `<span style="font-style: italic">Click on a cell to see it like in game</span>`;
-
-	div.innerHTML =
-		`<div>` +
-		`<div id=\'dragDivHeader\'>` +
-		`<img alt=\'coach\' src=\'${chrome.runtime.getURL("icon-48.png")}\' />&nbsp;&nbsp;Coach's Translation Tool` +
-		`</div>` +
-		`<div id=\'dragDivTranslation\'>` + emptyCell + `</div>` +
-		`</div>`;
-
-	div.style.display = 'block';
 
 	document.body.append(div);
 
-	var target = document.querySelector('#t-formula-bar-input > .cell-input');
+	let divHeader = document.createElement('div');
+	divHeader.setAttribute("id", "dragDivHeader");
 
-	var observer = new MutationObserver(function(mutations) {
-		if (target.innerText.trim().startsWith("last updated") || target.innerText.trim().length <= 0) {
-			document.getElementById("dragDivTranslation").innerHTML = emptyCell;
+	div.appendChild(divHeader);
+
+	let headerImg = document.createElement('img');
+	headerImg.setAttribute("id", "dragDivHeaderImg");
+	headerImg.setAttribute("alt", "coach");
+	headerImg.setAttribute("src", chrome.runtime.getURL("icon-48.png"));
+
+	let divTranslate = document.createElement('div');
+	divTranslate.setAttribute("id", "dragDivTranslation");
+
+	let spanCellText = document.createElement('span');
+	spanCellText.setAttribute("id", "spanCellTranslatedText");
+	parseInnerHTML(spanCellText);
+
+	div.appendChild(divTranslate);
+
+	let spanHeaderText = document.createElement('span');
+	spanHeaderText.setAttribute("id", "spanHeaderText");
+	spanHeaderText.innerText = "    Coach's Translation Tool";
+
+	divHeader.appendChild(headerImg);
+	divHeader.appendChild(spanHeaderText);
+
+	divTranslate.appendChild(spanCellText);
+
+	div.style.display = 'block';
+
+	let target = document.querySelector('#t-formula-bar-input > .cell-input');
+
+	let observer = new MutationObserver(function(mutations) {
+		const strToWatch = target.innerText.trim();
+		const spanCell = document.getElementById("spanCellTranslatedText");
+
+		if (strToWatch.startsWith("last updated") || strToWatch.length <= 0) {
+			parseInnerHTML(spanCell);
 		} else {
-			document.getElementById("dragDivTranslation").innerHTML = replaceSpecialCharsInText(target.innerText);
+			parseInnerHTML(spanCell, replaceSpecialCharsInText(strToWatch));
 		}
 	});
+
 	observer.observe(target, {
 		attributes:    true,
 		childList:     true,
