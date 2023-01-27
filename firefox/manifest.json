@@ -5,6 +5,11 @@
 	"description": "Adds to GoogleSheets in Firefox an in-game preview of translation strings for LegionTD2",
 	"author": "Kidev",
 	"homepage_url": "https://github.com/Kidev/LTD2_TranslationTool",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "ltd2_translator_tool@addons.firefox.kidev.org"
+		}
+	},
 	"permissions": [
 		"activeTab",
 		"scripting"

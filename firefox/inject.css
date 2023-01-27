@@ -23,12 +23,15 @@
     color: white;
     font-family: 'Poppins',sans-serif;
     text-align: left;
-    vertical-align: center;
     background-color:  #27293d;
     border-top-right-radius: 5px;
     padding-right: 5px;
     text-transform: uppercase;
     font-size: 1rem;
+}
+
+#spanHeaderText {
+    vertical-align: 50%;
 }
 
 #dragDivTranslation {

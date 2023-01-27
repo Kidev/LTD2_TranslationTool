@@ -104,8 +104,12 @@ function injectPreviewIntoPage() {
 
 	div.appendChild(divTranslate);
 
+	let spanHeaderText = document.createElement('span');
+	spanHeaderText.setAttribute("id", "spanHeaderText");
+	spanHeaderText.innerText = "    Coach's Translation Tool";
+
 	divHeader.appendChild(headerImg);
-	divHeader.appendChild(document.createTextNode("  Coach's Translation Tool"));
+	divHeader.appendChild(spanHeaderText);
 
 	divTranslate.appendChild(spanCellText);
 
