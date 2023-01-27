@@ -137,8 +137,4 @@ let prevWinDiv = document.querySelector('#dragDiv');
 
 if (prevWinDiv === null) {
 	injectPreviewIntoPage();
-} else if (prevWinDiv.style.display === 'none') {
-	prevWinDiv.style.display = 'block';
-} else {
-	prevWinDiv.style.display = 'none';
 }
